@@ -61,7 +61,7 @@ export default function SignUpForm({ onSignUp, onSSO, isSubmitting, triggerToast
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
-      triggerToast("Please solve form validation requirements.", "alert");
+      triggerToast("Please solve validation requirements.", "alert");
       return;
     }
 
@@ -88,7 +88,7 @@ export default function SignUpForm({ onSignUp, onSSO, isSubmitting, triggerToast
           </div>
           <input 
             className="w-full bg-slate-900/65 border border-white/10 text-white placeholder-slate-500 px-4 py-3.5 rounded-lg text-sm transition-all outline-none focus:border-rose-500 focus:ring-1 focus:ring-rose-500/20" 
-            placeholder="e.g. Alexis Thorne" 
+            placeholder=" " 
             type="text"
             value={fullName}
             onChange={(e) => {
@@ -110,7 +110,7 @@ export default function SignUpForm({ onSignUp, onSSO, isSubmitting, triggerToast
           </div>
           <input 
             className="w-full bg-slate-900/65 border border-white/10 text-white placeholder-slate-500 px-4 py-3.5 rounded-lg text-sm transition-all outline-none focus:border-rose-500 focus:ring-1 focus:ring-rose-500/20" 
-            placeholder="alexis@organization.com" 
+            placeholder=" " 
             type="email"
             value={email}
             onChange={(e) => {
@@ -132,7 +132,7 @@ export default function SignUpForm({ onSignUp, onSSO, isSubmitting, triggerToast
           </div>
           <input 
             className="w-full bg-slate-900/65 border border-white/10 text-white placeholder-slate-500 px-4 py-3.5 rounded-lg text-sm transition-all outline-none focus:border-rose-500 focus:ring-1 focus:ring-rose-500/20" 
-            placeholder="alexis_handle" 
+            placeholder=" " 
             type="text"
             value={username}
             onChange={(e) => {
