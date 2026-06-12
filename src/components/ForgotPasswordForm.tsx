@@ -31,7 +31,7 @@ export default function ForgotPasswordForm({ onResetSubmit, onBackToLogin, isSub
           Reset your password
         </h1>
         <p className="text-slate-400 text-sm mt-3 leading-relaxed">
-          Enter your email address to carry out a secure directory password restoration link.
+          Enter your email address to reset your password.
         </p>
       </div>
 
@@ -78,7 +78,7 @@ export default function ForgotPasswordForm({ onResetSubmit, onBackToLogin, isSub
                   <div className="absolute inset-0 border-2 border-white rounded-[3px] anim-inline-mini"></div>
                   <div className="absolute inset-1 bg-rose-600 rounded-[1px] animate-pulse"></div>
                 </div>
-                <span>Dispatching request...</span>
+                <span>Sending request...</span>
               </>
             ) : (
               <span>Send Recovery Link</span>
@@ -91,14 +91,14 @@ export default function ForgotPasswordForm({ onResetSubmit, onBackToLogin, isSub
             <Mail className="w-6 h-6 animate-pulse" />
           </div>
           <div>
-            <h3 className="text-base font-semibold text-white tracking-wide">Verification Link Dispatched</h3>
+            <h3 className="text-base font-semibold text-white tracking-wide">Verification Link Sent</h3>
             <p className="text-slate-300 text-xs mt-3 leading-relaxed">
-              We have dispatched a security recovery key to <span className="text-rose-300 font-semibold break-all selection:bg-rose-600 font-sans">{resetEmail}</span>. Check your inbox to set a brand new password credential.
+              A link has been dispatched for account recovery <span className="text-rose-300 font-semibold break-all selection:bg-rose-600 font-sans">{resetEmail}</span>. Check your inbox to set a brand new password credential.
             </p>
           </div>
 
           <div className="p-4 bg-white/5 rounded-xl text-xs text-slate-400 leading-relaxed text-left border border-white/5 font-sans">
-            <b>Notice:</b> Reset links remain active for 15 minutes before expiring to safeguard your primary database profile.
+            <b>Notice:</b> Reset links remain active for 15 minutes before expiring, be quick.
           </div>
 
           <button
@@ -106,7 +106,7 @@ export default function ForgotPasswordForm({ onResetSubmit, onBackToLogin, isSub
             className="text-xs text-rose-450 hover:text-rose-300 font-semibold underline underline-offset-4 cursor-pointer font-sans"
             onClick={() => setResetSent(false)}
           >
-            Resend secure email
+            Resend the email
           </button>
         </div>
       )}
