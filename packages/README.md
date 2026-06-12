@@ -63,7 +63,7 @@ This enforces consistency and guarantees spacing without writing custom PostCSS 
 
 ---
  
-## ⚡ CLI Design (`vyzorix-cli`) ----(needs rewriting , it's currently rRust)
+## ⚡ CLI Design (`vyzorix-cli`) ----
 
 Vyzorix CLI uses **Commander.js** combined with **Inquirer.js** to bootstrap environments rapidly.
 
