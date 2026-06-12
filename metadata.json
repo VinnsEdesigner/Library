@@ -1,0 +1,6 @@
+{
+  "name": "Vyzorix",
+  "description": "Secure gateway to register and operate in the Vyzorix control console.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
