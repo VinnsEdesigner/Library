@@ -1,6 +1,6 @@
-# Vyzorix Development Workspace Monorepo
+# Vyzorix Development library
 
-Welcome to the development workspace for the Vyzorix ecosystems. This suite contains modular libraries and CLI commands dedicated to securing elite infrastructure operations, configuring runtime nodes, and deploying standardized interfaces.
+Welcome to the development library for the Vyzorix ecosystems. This suite contains modular libraries and CLI commands, infrastructure operations, configuring runtimes, and deploying standardized interfaces.
 
 ---
 
@@ -9,7 +9,7 @@ Welcome to the development workspace for the Vyzorix ecosystems. This suite cont
 ```
 vyzorix-workspace/
 ├── packages/
-│   ├── vyzorix/                   # 🎨 @vyzorix/ui (COMPLETED)
+│   ├── vyzorix/                   # 🎨 @vyzorix/ui (In development)
 │   │   ├── package.json
 │   │   ├── src/
 │   │   │   ├── index.ts           # Unified exports
@@ -24,12 +24,12 @@ vyzorix-workspace/
 │   │   │       ├── SuccessView.tsx, WaitingVerification.tsx # Views
 │   │   │       └── DataCard.tsx, StatusIndicator.tsx # Core Atoms
 │   │
-│   ├── vyzorix-config/            # ⚙️ @vyzorix/config (PROPOSED)
+│   ├── vyzorix-config/            # ⚙️ @vyzorix/config (In development)
 │   │   ├── src/
 │   │   │   ├── validator.ts        
 │   │   │   └── session.ts         
 │   │
-│   └── vyzorix-cli/               # ⚡ vyzorix-cli (PROPOSED)
+│   └── vyzorix-cli/               # ⚡ vyzorix-cli (in development)
 │       ├── bin/vyzorix.js         # Executable entry
 │       ├── package.json
 │       └── src/
@@ -62,8 +62,8 @@ export function Panel() {
 This enforces consistency and guarantees spacing without writing custom PostCSS plugins.
 
 ---
-
-## ⚡ CLI Design Philosophy (`vyzorix-cli`)
+ 
+## ⚡ CLI Design (`vyzorix-cli`) ----(needs rewriting , it's currently rRust)
 
 Vyzorix CLI uses **Commander.js** combined with **Inquirer.js** to bootstrap environments rapidly.
 
@@ -78,7 +78,7 @@ Vyzorix CLI uses **Commander.js** combined with **Inquirer.js** to bootstrap env
    * Asserts the integrity of `vyzorix_session` handling mechanisms.
 
 3. `vyzorix generate:theme`
-   * Bootstraps local instances of `colors.ts`, `typography.ts` in the target project, allowing space system engineers to locally safely override background colors and padding without breaking structural boundaries.
+   * Bootstraps local instances of `colors.ts`, `typography.ts` in the target project, allowing to locally safely override background colors and padding without breaking structural boundaries.
 
 ---
 
@@ -100,17 +100,13 @@ To enable seamless local resolution of packages without complex symlinking, add 
 
 ## 📈 Roadmap & Package Sync Mappings
 
-### 1. `@vyzorix/ui` (Completed & Active)
+### 1. `@vyzorix/ui'
 * **Goal**: Modularize standard operator interface systems.
-* **Status**: Complete! Ready to compile and publish to public/private registries. 
-* **Next Steps**: Discuss customizable color overrides (e.g. customized brand color palettes) and customizable alert themes.
+* **Status**: In development but still ready to publish to public/private registries. 
 
-### 2. `@vyzorix/config` (Proposed)
+### 2. `@vyzorix/config`
 * **Goal**: Holds core cookie setups, cryptographic signature secrets, and database endpoints mapping profiles.
-* **Status**: Drafting interfaces.
-* **Next Steps**: Map out how to align with Go's cookie encryption schemas, and defining standardized security parameters.
 
-### 3. `vyzorix-cli` (Proposed)
-* **Goal**: Provide space system engineers with tools to generate workspace databases (`vyzorix.db`), inspect cookie integrity on active proxies, and auto-inject templates.
-* **Status**: Interface mappings underway.
-* **Next Steps**: Establish preferred runtime execution frameworks (e.g., commander.js or yargs).
+
+### 3. `vyzorix-cli` 
+* **Goal**: No goal yet-------
