@@ -1,10 +1,10 @@
-# Vyzorix Portal Multi-Tier Architecture & Integration Roadmap
+# Vyzorix Architecture & Integration
 
-This guide details how to integrate the crafted **Vyzorix Authorization Portal** into your corporate backend environment: **TypeScript**, **pnpm**, **Vite**, **React with TanStack SSR**, **Nitro Node.js server (HTML Hydration)**, and a **Go Backend Server with SQLite v3**.
+This guide details how to integrate  into the Vyzorix C2 dashboard**TypeScript**, **pnpm**, **Vite**, **React with TanStack SSR**, **Nitro Node.js server (HTML Hydration)**, and a **Go Backend Server with SQLite v3**.
 
 ---
 
-## 1. Modular Core Architecture Design
+## 1. Architecture Design
 
 We have split the integration interface into decoupled, unified micro-clients stored inside `/src/lib/clients/` and coordinate everything through a central switchboard in `/src/lib/config.ts`.
 
@@ -52,7 +52,7 @@ When in SSR Mode, States in `/src/App.tsx` are pre-initiated during server rende
 
 ---
 
-## 3. High-Security Single Sign-On (SSO) Integration Setup
+## 3.Security Single Sign-On (SSO) Integration Setup
 
 Both **Google OAuth 2.0** and **GitHub OAuth App** integration require setting up credentials on their developer consoles. The Go Backend acts as the OAuth callback listener, keeping your private Client Secrets isolated.
 
