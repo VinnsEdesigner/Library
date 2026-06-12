@@ -8,7 +8,6 @@ import LoginForm from './components/LoginForm';
 import ForgotPasswordForm from './components/ForgotPasswordForm';
 import WaitingVerification from './components/WaitingVerification';
 import SuccessView from './components/SuccessView';
-import OperatorDashboard from './components/OperatorDashboard';
 import { 
   registerOperator, 
   loginOperator, 
@@ -42,7 +41,7 @@ export default function App() {
 
   // Loading/Authenticating Polling Simulation
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [verificationStatus, setVerificationStatus] = useState('Connecting to secure verification service...');
+  const [verificationStatus, setVerificationStatus] = useState('Connecting to service...');
   const [successReport, setSuccessReport] = useState<SuccessReport | null>(() => {
     return getHydratedState<SuccessReport | null>('successReport', null);
   });
@@ -72,7 +71,7 @@ export default function App() {
       
       if (ssoCode && ssoState) {
         setIsSubmitting(true);
-        triggerToast(`Completing secure Single Sign-On handshake with ${ssoProvider}...`, "success");
+        triggerToast(`Completing sign-in with ${ssoProvider}...`, "success");
         
         handleSSOCallback(ssoProvider as 'Google' | 'GitHub', ssoCode, ssoState)
           .then((report) => {
@@ -85,7 +84,7 @@ export default function App() {
             setSuccessReport(report);
             setView('success');
             window.history.replaceState({}, document.title, window.location.pathname);
-            triggerToast("Successfully signed in via Single Sign-On!", "success");
+            triggerToast("Successfully signed up!", "success");
           })
           .catch((err) => {
             setIsSubmitting(false);
@@ -108,7 +107,7 @@ export default function App() {
               });
               setSuccessReport(session);
               setView('success');
-              triggerToast("Restored active secure operator session.", "success");
+              triggerToast("Restored active session.", "success");
             }
           })
           .catch(() => {
@@ -144,20 +143,20 @@ export default function App() {
   useEffect(() => {
     if (view === 'waiting_verification') {
       if (ARCHITECTURE_CONFIG.IS_SIMULATED) {
-        setVerificationStatus('Awaiting secure database link interaction...');
+        setVerificationStatus('Awaiting interaction...');
         
         const step1 = setTimeout(() => {
-          setVerificationStatus('Incoming token signature detected from email client...');
+          setVerificationStatus('Incoming token client...');
         }, 1500);
 
         const step2 = setTimeout(() => {
-          setVerificationStatus('Acoustic link handshake established. Setting up profile...');
+          setVerificationStatus('Link established. Setting up profile...');
         }, 3000);
 
         const finalRedirection = setTimeout(() => {
           const fallbackEmail = profileData.email || 'sso-google@vyzorix.com';
           const fallbackUsername = profileData.username || 'google_member';
-          const fallbackFullName = profileData.fullName || 'Enterprise Workspace User';
+          const fallbackFullName = profileData.fullName || 'Vyzorix User';
 
           setSuccessReport({
             fullName: fallbackFullName,
@@ -171,7 +170,7 @@ export default function App() {
           });
 
           setView('success');
-          triggerToast("Email verification authenticated successfully!", "success");
+          triggerToast("Email verification successful!", "success");
         }, 4500);
 
         return () => {
@@ -181,13 +180,13 @@ export default function App() {
         };
       } else {
         // REAL REST POLLING MODE: Query SQLite DB continuously
-        setVerificationStatus('Initiating live database polling sequence...');
+        setVerificationStatus('Initiating live dB polling ...');
         const tokenToPoll = verificationToken || 'token_placeholder';
         let attempts = 0;
         
         const pollInterval = setInterval(() => {
           attempts++;
-          setVerificationStatus(`Polling verification server (Ping #${attempts})...`);
+          setVerificationStatus(`Polling verification host(Ping #${attempts})...`);
           
           pollVerificationStatus(tokenToPoll)
             .then((res) => {
@@ -237,7 +236,7 @@ export default function App() {
           setVerificationToken(res.token);
         }
         setView('waiting_verification');
-        triggerToast(res.message || "Verification link dispatched.", "success");
+        triggerToast(res.message || "Verification link Sent.", "success");
       })
       .catch((err) => {
         setIsSubmitting(false);
@@ -264,7 +263,7 @@ export default function App() {
 
   // SSO connector
   const handleSSOAction = (provider: 'GitHub' | 'Google') => {
-    triggerToast(`Initializing communication with ${provider}...`, "success");
+    triggerToast(`Yes Success${provider}...`, "success");
     setIsSubmitting(true);
 
     initiateSSO(provider)
@@ -283,7 +282,7 @@ export default function App() {
         } else {
           setTimeLeft(900);
           setView('waiting_verification');
-          triggerToast(`${provider} credentials loaded. Pending secure validation...`, "success");
+          triggerToast(`${provider} credentials loaded....`, "success");
         }
       })
       .catch((err) => {
@@ -315,14 +314,14 @@ export default function App() {
       setSuccessReport(null);
       setView('signup');
       setTimeLeft(900);
-      triggerToast("Workspace registration session recycled.", "success");
+      triggerToast("Registration session recycled.", "success");
     }).catch(() => {
       // Fallback reset in case of connection failure
       setProfileData({ fullName: '', email: '', username: '' });
       setSuccessReport(null);
       setView('signup');
       setTimeLeft(900);
-      triggerToast("Workspace offline session cleared.", "success");
+      triggerToast("Offline session cleared.", "success");
     });
   };
 
@@ -450,7 +449,7 @@ export default function App() {
                 onResend={() => {
                   setTimeLeft(900);
                   if (ARCHITECTURE_CONFIG.IS_SIMULATED) {
-                    triggerToast(`New verification token transmitted to ${profileData.email}`, "success");
+                    triggerToast(`New verification sent to ${profileData.email}`, "success");
                   } else {
                     setIsSubmitting(true);
                     triggerTokenResend(profileData.email)
@@ -459,11 +458,11 @@ export default function App() {
                         if (res && res.token) {
                           setVerificationToken(res.token);
                         }
-                        triggerToast(res.message || `New verification token transmitted to ${profileData.email}`, "success");
+                        triggerToast(res.message || `New verification sent to ${profileData.email}`, "success");
                       })
                       .catch((err) => {
                         setIsSubmitting(false);
-                        triggerToast(err.message || "Failed to resend verification token.", "alert");
+                        triggerToast(err.message || "Resend failed.", "alert");
                       });
                   }
                 }} 
@@ -495,7 +494,7 @@ export default function App() {
                 successReport={successReport} 
                 onProceed={() => {
                   setView('dashboard' as ViewMode);
-                  triggerToast("Entering secure core operator dashboard...", "success");
+                  triggerToast("Continuing...", "success");
                 }} 
               />
             )}
@@ -524,7 +523,7 @@ export default function App() {
             <a 
               className="hover:text-rose-455 transition-colors font-medium cursor-pointer" 
               href="#terms" 
-              onClick={(e) => { e.preventDefault(); triggerToast("Standard corporate policies apply.", "success"); }}
+              onClick={(e) => { e.preventDefault(); triggerToast("Policies apply.", "success"); }}
             >
               Terms of Use
             </a>
