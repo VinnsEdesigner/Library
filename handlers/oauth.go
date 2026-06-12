@@ -46,7 +46,7 @@ func HandleGoogleLogin(w http.ResponseWriter, r *http.Request) {
 
 	googleClientID := os.Getenv("GOOGLE_CLIENT_ID")
 	if googleClientID == "" {
-		fmt.Println("GOOGLE_CLIENT_ID missing; redirecting to high-fidelity frontend callback loop.")
+		fmt.Println("GOOGLE_CLIENT_ID missing; redirecting.")
 		redirectMock := fmt.Sprintf("/?code=sim_google_code_991823&state=%s&provider=Google", state)
 		http.Redirect(w, r, redirectMock, http.StatusTemporaryRedirect)
 		return
@@ -93,7 +93,7 @@ func HandleGoogleCallback(w http.ResponseWriter, r *http.Request) {
 
 		tokenResp, err := services.ExchangeGoogleCode(code, googleClientID, googleClientSecret, "http://localhost:3000/api/auth/sso/google/callback")
 		if err != nil {
-			writeJSONError(w, http.StatusBadGateway, "Google handshake token exchange failed: "+err.Error())
+			writeJSONError(w, http.StatusBadGateway, "Google connection failed: "+err.Error())
 			return
 		}
 
@@ -113,7 +113,7 @@ func HandleGoogleCallback(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		operatorID, err = database.CreateNewOperator(fullName, email, username, "")
 		if err != nil {
-			writeJSONError(w, http.StatusInternalServerError, "Federated profiling failed Database writes: "+err.Error())
+			writeJSONError(w, http.StatusInternalServerError, "Profiling failed Database writes: "+err.Error())
 			return
 		}
 		_ = database.CreateSSOIdentity(operatorID, "google", "sub_google_federated_"+username)
@@ -159,7 +159,7 @@ func HandleGitHubLogin(w http.ResponseWriter, r *http.Request) {
 
 	githubClientID := os.Getenv("GITHUB_CLIENT_ID")
 	if githubClientID == "" {
-		fmt.Println("GITHUB_CLIENT_ID missing; redirecting to high-fidelity frontend callback loop.")
+		fmt.Println("GITHUB_CLIENT_ID missing; redirecting.")
 		redirectMock := fmt.Sprintf("/?code=sim_github_code_abc221&state=%s&provider=GitHub", state)
 		http.Redirect(w, r, redirectMock, http.StatusTemporaryRedirect)
 		return
@@ -199,7 +199,7 @@ func HandleGitHubCallback(w http.ResponseWriter, r *http.Request) {
 
 		tokenResp, err := services.ExchangeGitHubCode(code, githubClientID, githubClientSecret, "http://localhost:3000/api/auth/sso/github/callback")
 		if err != nil {
-			writeJSONError(w, http.StatusBadGateway, "GitHub exchange connection failed: "+err.Error())
+			writeJSONError(w, http.StatusBadGateway, "GitHub connection failed: "+err.Error())
 			return
 		}
 
