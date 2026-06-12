@@ -19,7 +19,7 @@ export async function registerOperator(payload: SignUpPayload): Promise<{ succes
       setTimeout(() => {
         resolve({
           success: true,
-          message: `Oauth operator registration completed. Secure verification token sent to ${payload.email}`
+          message: `Oauth operator registration completed. ${payload.email}`
         });
       }, 1000);
     });
@@ -67,7 +67,7 @@ export async function loginOperator(usernameOrEmail: string, passwordSecret: str
 
   if (!response.ok) {
     const errorData = await response.json().catch(() => ({}));
-    throw new Error(errorData.message || 'Authentication rejected by security systems.');
+    throw new Error(errorData.message || 'Authentication rejected.');
   }
 
   return response.json();
@@ -79,7 +79,7 @@ export async function requestPasswordReset(emailAddress: string): Promise<{ succ
       setTimeout(() => {
         resolve({
           success: true,
-          message: 'Password restoration protocol initiated. Link has been sent.'
+          message: 'Password restoration, Link has been sent.'
         });
       }, 1000);
     });
@@ -94,7 +94,7 @@ export async function requestPasswordReset(emailAddress: string): Promise<{ succ
 
   if (!response.ok) {
     const errorData = await response.json().catch(() => ({}));
-    throw new Error(errorData.message || 'Restoration dispatch rejected.');
+    throw new Error(errorData.message || 'Restoration rejected.');
   }
 
   return response.json();
