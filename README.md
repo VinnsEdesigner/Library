@@ -1,6 +1,5 @@
-# Vyzorix Secure Operator Portal & SSO Gateway
-
-Vyzorix is a high-fidelity, secure multi-tier authentication portal built to authenticate elite infrastructure operators. It incorporates a modern React client, an Express-based hydration and server proxy layer, and an asynchronous, performant Go API backend powered by SQLite (v3).
+# Vyzorix Sign-up pages
+ incorporates a modern React client, an Node.js Nitro-HML-based hydration and server proxy layer, and an asynchronous, performant Go API backend powered by SQLite (v3).
 
 This architecture completely decouples persistent states from vulnerable client-side storage technologies like `localStorage`, moving instead to secure, **encrypted, and HttpOnly cookie blobs** managed at the multi-tier boundaries.
 
@@ -13,7 +12,7 @@ This architecture completely decouples persistent states from vulnerable client-
                │  - React 18 / Tailwind CSS / Lucide
                │  - Strict Cookie-Driven State (Local Storage Deprecated)
                ▼
-   [ Node.js/Express Hydration Server ] (Port 3000)
+   [ Node.js Hydration Server ] (Port 3000)
    ├── Asset compilation & Vite streaming dev server
    └── Session Pre-prefetching: Reads cookie state or pending verification state,
        injecting into `window.__VYZORIX_PREFETCHED_STATE__`
@@ -115,7 +114,7 @@ The backend maintains persistent records in `vyzorix.db` with the following enti
 
 ### Prerequisites
 * **Node.js** (v18+) and **npm**
-* **Go** (1.20+) and standard C compilers (for `go-sqlite3` bindings)
+* **Go** (1.24+) and standard C compilers (for `go-sqlite3` bindings)
 
 ### Installation & Compilation
 1. Install client-side node packages:
@@ -130,4 +129,4 @@ The backend maintains persistent records in `vyzorix.db` with the following enti
    ```bash
    npm run dev
    ```
-   *This commands initializes `tsx server.ts` which proxies traffic synchronously, keeping your front-end hot-reloads and API endpoints perfectly integrated.*
+   *This commands initializes `tsx server.ts` which proxies traffic synchronously, keeping your front-end hot-reloads and API endpoints perfectly aligned**
