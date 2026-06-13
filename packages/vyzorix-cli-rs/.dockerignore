@@ -1,0 +1,16 @@
+# Ignore build outputs
+target/
+**/*.rs.bk
+
+# Ignore OS files
+.DS_Store
+Thumbs.db
+
+# Ignore environment variables
+.env
+.env.*
+!.env.example
+
+# Ignore other node/js artifacts just in case
+node_modules/
+dist/
